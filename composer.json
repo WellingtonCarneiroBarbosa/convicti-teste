@@ -13,6 +13,7 @@
         "spatie/laravel-permission": "^5.7"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.16",
@@ -66,11 +67,21 @@
             "@php artisan route:clear",
             "@php artisan config:cache",
             "@php artisan optimize"
-        ]    
+        ],
+        "ide-helper": [
+            "@php artisan ide-helper:models -W",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
+        ],
+        "test": [
+            "@php artisan test --parallel --coverage --min=85"
+        ]
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper"
+            ]
         }
     },
     "config": {
