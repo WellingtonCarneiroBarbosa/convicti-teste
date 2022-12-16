@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ApplicationSeeder extends Seeder
@@ -15,7 +14,7 @@ class ApplicationSeeder extends Seeder
     public function run()
     {
         $this->call([
-            RolesSeeder::class
+            RolesSeeder::class,
         ]);
     }
 }

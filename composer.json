@@ -39,14 +39,34 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "composer update-tools"
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "composer install-tools"
         ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
+        "post-install-cmd": [
+            "composer install-tools"
+        ],
+        "install-tools": [
+            "composer install --working-dir=tools/php-cs-fixer"
+        ],
+        "update-tools": [
+            "composer update --working-dir=tools/php-cs-fixer"
+        ],
+        "fix": [
+            "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix"
+        ],
+        "clear-laravel": [
+            "@php artisan cache:clear",
+            "@php artisan config:clear",
+            "@php artisan view:clear",
+            "@php artisan route:clear",
+            "@php artisan config:cache",
+            "@php artisan optimize"
+        ]    
     },
     "extra": {
         "laravel": {
