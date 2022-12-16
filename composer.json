@@ -46,7 +46,8 @@
         "post-root-package-install": [
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "composer install-tools"
+            "composer install-tools",
+            "composer ide-helper"
         ],
         "post-install-cmd": [
             "composer install-tools"
