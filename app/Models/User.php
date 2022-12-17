@@ -45,6 +45,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @mixin \Eloquent
  * @property string $role
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
+ * @property int|null $unity_id
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUnityId($value)
  */
 class User extends Authenticatable
 {

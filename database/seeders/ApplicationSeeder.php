@@ -6,12 +6,14 @@ use Illuminate\Database\Seeder;
 
 class ApplicationSeeder extends Seeder
 {
-    public const DIRETOR_GERAL = [
+    public const DEFAULT_PASSWORD = '123mudar';
+
+    public const MAIN_DIRECTOR = [
         'name'  => 'Edson A. do Nascimento',
         'email' => 'pele@magazineaziul.com.br',
     ];
 
-    public const DIRETORES  = [
+    public const SUB_DIRECTORS  = [
         [
             'name'   => 'Vagner Mancini',
             'email'  => 'vagner.mancini@magazineaziul.com.br',
@@ -29,70 +31,70 @@ class ApplicationSeeder extends Seeder
         ],
     ];
 
-    public const UNIDADES = [
+    public const UNITIES = [
         [
-            'nome'      => 'Porto Alegre',
+            'name'      => 'Porto Alegre',
             'latitude'  => '-30.048750057541955',
             'longitude' => '-51.228587422990806',
-            'diretoria' => 'south',
+            'region'    => 'south',
         ],
         [
-            'nome'      => 'Florianopolis',
+            'name'      => 'Florianopolis',
             'latitude'  => '-27.55393525017396',
             'longitude' => '-48.49841515885026',
-            'diretoria' => 'south',
+            'region'    => 'south',
         ],
         [
-            'nome'      => 'Curitiba',
+            'name'      => 'Curitiba',
             'latitude'  => '-25.473704465731746',
             'longitude' => '-49.24787198992874',
-            'diretoria' => 'south',
+            'region'    => 'south',
         ],
         [
-            'nome'      => 'Sao Paulo',
+            'name'      => 'Sao Paulo',
             'latitude'  => '-23.544259437612844',
             'longitude' => '-46.64370714029131',
-            'diretoria' => 'southeast',
+            'region'    => 'southeast',
         ],
         [
-            'nome'      => 'Rio de Janeiro',
+            'name'      => 'Rio de Janeiro',
             'latitude'  => '-22.923447510604802',
             'longitude' => '-43.23208495438858',
-            'diretoria' => 'southeast',
+            'region'    => 'southeast',
         ],
         [
-            'nome'      => 'Belo Horizonte',
+            'name'      => 'Belo Horizonte',
             'latitude'  => '-19.917854829716372',
             'longitude' => '-43.94089385954766',
-            'diretoria' => 'southeast',
+            'region'    => 'southeast',
         ],
         [
-            'nome'      => 'Vitoria',
+            'name'      => 'Vitoria',
             'latitude'  => '-20.340992420772206',
             'longitude' => '-40.38332271475097',
-            'diretoria' => 'southeast',
+            'region'    => 'southeast',
         ],
         [
-            'nome'      => 'Campo Grande',
+            'name'      => 'Campo Grande',
             'latitude'  => '-20.462652006300377',
             'longitude' => '54.615658937666645',
-            'diretoria' => 'midwest',
+            'region'    => 'midwest',
         ],
         [
-            'nome'      => 'Goiania',
+            'name'      => 'Goiania',
             'latitude'  => '-16.673126240814387',
             'longitude' => '-49.25248826354209',
-            'diretoria' => 'midwest',
+            'region'    => 'midwest',
         ],
         [
-            'nome'      => 'Cuiaba',
+            'name'      => 'Cuiaba',
             'latitude'  => '-15.601754458320842',
             'longitude' => '-56.09832706558089',
-            'diretoria' => 'midwest',
+            'region'    => 'midwest',
         ],
     ];
 
-    public const GERENTES = [
+    public const MANAGERS = [
         [
             'name'    => 'Ronaldinho Gaucho',
             'email'   => 'ronaldinho.gaucho@magazineaziul.com.br',
@@ -145,7 +147,7 @@ class ApplicationSeeder extends Seeder
         ],
     ];
 
-    public const VENDEDORES = [
+    public const SELLERS = [
         [
             'name'    => 'Afonso Afancar',
             'email'   => 'afonso.afancar@magazineaziul.com.br',
@@ -405,8 +407,10 @@ class ApplicationSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call([
-        //     RolesSeeder::class,
-        // ]);
+        $this->call([
+            UnitiesSeeder::class,
+            RolesSeeder::class,
+            UsersSeeder::class,
+        ]);
     }
 }

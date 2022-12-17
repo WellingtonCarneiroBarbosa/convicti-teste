@@ -13,7 +13,7 @@ class RolesSeeder extends Seeder
             'guard_name' => 'api',
         ],
         [
-            'name'       => 'director',
+            'name'       => 'sub-director',
             'guard_name' => 'api',
         ],
         [
