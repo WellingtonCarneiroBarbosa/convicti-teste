@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\Unity
@@ -30,4 +33,28 @@ use Illuminate\Database\Eloquent\Model;
 class Unity extends Model
 {
     use HasFactory;
+
+    public static function findByName(string $name, bool $throws = false): null|self
+    {
+        $name = Str::lower($name);
+
+        $unity = self::query()->where('name', $name)->first();
+
+        if (is_null($unity)) {
+            if (! $throws) {
+                return null;
+            }
+
+            throw new ModelNotFoundException("Unity with name {$name} not found");
+        }
+
+        return $unity;
+    }
+
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => Str::lower($value),
+        );
+    }
 }

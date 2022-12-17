@@ -3,11 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Hash;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Str;
 
 /**
  * App\Models\User
@@ -47,6 +52,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  * @property int|null $unity_id
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUnityId($value)
+ * @property-read \App\Models\Unity|null $unity
  */
 class User extends Authenticatable
 {
@@ -84,4 +90,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function unity(): BelongsTo
+    {
+        return $this->belongsTo(Unity::class);
+    }
+
+    public function name(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => Str::lower($value),
+            get: fn (string $value) => Str::title($value),
+        );
+    }
+
+    public function email(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => Str::lower($value),
+        );
+    }
+
+    public function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => Hash::make($value),
+        );
+    }
 }
