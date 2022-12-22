@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\MonetaryValue;
+use App\Models\Concerns\HasImmutableColumn;
 use App\Models\Concerns\HasMonetaryColumn;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,6 +45,7 @@ class Order extends Model
     use HasFactory;
     use HasMonetaryColumn;
     use Auditable;
+    use HasImmutableColumn;
 
     public const STATUSES = [
         'estorno'          => self::STATUS_REVERSAL,
@@ -66,6 +68,12 @@ class Order extends Model
     protected $auditInclude = [
         'status',
         'status_description',
+    ];
+
+    protected $immutableFields = [
+        'amount',
+        'seller_id',
+        'unity_id',
     ];
 
     public function amount(): Attribute
