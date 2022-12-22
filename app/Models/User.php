@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use OwenIt\Auditing\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Str;
 
@@ -53,6 +54,8 @@ use Str;
  * @property int|null $unity_id
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUnityId($value)
  * @property-read \App\Models\Unity|null $unity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
+ * @property-read int|null $audits_count
  */
 class User extends Authenticatable
 {
@@ -60,6 +63,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
+    use Auditable;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -69,6 +73,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $auditInclude = [
+        'unity_id',
+        'password',
+        'email',
+        'name',
     ];
 
     /**

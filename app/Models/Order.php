@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OwenIt\Auditing\Auditable;
 
 /**
  * App\Models\Order
@@ -35,11 +36,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @property-read \App\Models\User|null $seller
  * @property-read \App\Models\Unity|null $unity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
+ * @property-read int|null $audits_count
  */
 class Order extends Model
 {
     use HasFactory;
     use HasMonetaryColumn;
+    use Auditable;
 
     public const STATUSES = [
         'estorno'          => self::STATUS_REVERSAL,
@@ -58,6 +62,11 @@ class Order extends Model
     public const STATUS_WAITING_PAYMENT  = 'waiting_payment';
     public const STATUS_AUTHORIZED       = 'authorized';
     public const STATUS_PAID             = 'paid';
+
+    protected $auditInclude = [
+        'status',
+        'status_description',
+    ];
 
     public function amount(): Attribute
     {
