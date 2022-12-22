@@ -15,7 +15,7 @@
     </li>
     <li>Run the following script to start the containers: <pre>./vendor/bin/sail up -d</pre></li>
     <li>Setup the application tables and data: <pre>./vendor/bin/sail artisan migrate --seed</pre></li>
-    <li>Go to <a href="http://localhost" target="blank">http://localhost</a> and voa-lá!</li>
+    <li>Go to <a href="http://laravel.test" target="blank">http://laravel.test</a> and voa-lá!</li>
 </ol>
 
 ---
