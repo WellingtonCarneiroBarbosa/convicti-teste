@@ -22,11 +22,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         if (app()->environment('local')) {
-            $this->factoryOrders();
+            $this->factoryOrdersLocal();
+        }
+
+        if (app()->environment('testing')) {
+            $this->factoryOrdersTesting();
         }
     }
 
-    private function factoryOrders(): void
+    private function factoryOrdersLocal(): void
     {
         $this->command->warn('Factoring orders...');
 
@@ -35,10 +39,10 @@ class DatabaseSeeder extends Seeder
         $this->command->withProgressBar(count($sellers), function () use ($sellers) {
             $this->command->getOutput()->progressStart();
 
-            $sellers->each(function (User $user) {
-                Order::factory(random_int(10, 150))->seller($user)->make()->each(
-                    function (Order $order) use ($user) {
-                        $order->unity()->associate($user->unity);
+            $sellers->each(function (User $seller) {
+                Order::factory(random_int(10, 150))->seller($seller)->make()->each(
+                    function (Order $order) use ($seller) {
+                        $order->unity()->associate($seller->unity);
 
                         $order->save();
                     }
@@ -47,5 +51,20 @@ class DatabaseSeeder extends Seeder
                 $this->command->getOutput()->progressAdvance();
             });
         });
+    }
+
+    private function factoryOrdersTesting()
+    {
+        $this->command->warn('Factoring orders...');
+
+        $seller = User::role('seller')->firstOrFail();
+
+        Order::factory(2)->seller($seller)->make()->each(
+            function (Order $order) use ($seller) {
+                $order->unity()->associate($seller->unity);
+
+                $order->save();
+            }
+        );
     }
 }

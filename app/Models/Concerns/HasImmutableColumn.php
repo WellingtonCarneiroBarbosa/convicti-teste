@@ -2,16 +2,16 @@
 
 namespace App\Models\Concerns;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\ImmutableModelFieldException;
 
 trait HasImmutableColumn
 {
-    protected static function bootHasImmutableColumn(): void
+    protected static function bootHasImmutableColumn()
     {
-        static::updating(function (Model $model) {
+        static::updating(function ($model) {
             foreach ($model->immutableFields as $field) {
                 if ($model->isDirty($field)) {
-                    $model->setAttribute($field, $model->getOriginal($field));
+                    throw new ImmutableModelFieldException($field);
                 }
             }
         });
