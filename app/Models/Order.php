@@ -42,7 +42,7 @@ class Order extends Model
     use HasMonetaryColumn;
 
     public const STATUSES = [
-        'estorno'          => self::STATUS_ESTORNO,
+        'estorno'          => self::STATUS_REVERSAL,
         'cancelled'        => self::STATUS_CANCELED,
         'charge_back'      => self::STATUS_CHARGE_BACK,
         'refused'          => self::STATUS_REFUSED,
@@ -51,13 +51,13 @@ class Order extends Model
         'paid'             => self::STATUS_PAID,
     ];
 
-    public const STATUS_ESTORNO         = 'estorno';
-    public const STATUS_CANCELED        = 'canceled';
-    public const STATUS_CHARGE_BACK     = 'charge_back';
-    public const STATUS_REFUSED         = 'refused';
-    public const STATUS_WAITING_PAYMENT = 'waiting_payment';
-    public const STATUS_AUTHORIZED      = 'authorized';
-    public const STATUS_PAID            = 'paid';
+    public const STATUS_REVERSAL         = 'reversal';
+    public const STATUS_CANCELED         = 'canceled';
+    public const STATUS_CHARGE_BACK      = 'charge_back';
+    public const STATUS_REFUSED          = 'refused';
+    public const STATUS_WAITING_PAYMENT  = 'waiting_payment';
+    public const STATUS_AUTHORIZED       = 'authorized';
+    public const STATUS_PAID             = 'paid';
 
     public function amount(): Attribute
     {

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,17 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'amount' => random_int(5, 9999),
+            'amount' => random_int(5, 3099),
             'status' => Order::STATUSES[array_rand(Order::STATUSES, 1)],
         ];
+    }
+
+    public function seller(User $user)
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'seller_id' => $user->id,
+            ];
+        });
     }
 }
