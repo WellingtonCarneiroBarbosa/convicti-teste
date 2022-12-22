@@ -209,7 +209,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'FoundationResponse' => \Symfony\Component\HttpFoundation\Response::class,
     ])->toArray(),
 
 ];
