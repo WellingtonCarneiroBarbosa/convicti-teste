@@ -29,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        /**
+         * Get the token model from request.
+         *
+         * @return \Laravel\Passport\Token
+         */
         Request::macro('getToken', function () {
             $tokenId     = \Lcobucci\JWT\Configuration::forUnsecuredSigner()
             ->parser()
@@ -37,6 +42,27 @@ class AppServiceProvider extends ServiceProvider
             ->get('jti');
 
             return \Laravel\Passport\Token::query()->findOrFail($tokenId);
+        });
+
+        /**
+         * Convert nested requests from ReactJS to array.
+         *
+         * TODO: Remove hard nested level.
+         *
+         * @param array $data
+         * @return array
+         */
+        Request::macro('nested', function (array $data) {
+            return dot($data, parse: true);
+        });
+
+        /**
+         * Check if request wants a API response.
+         *
+         * @return bool
+         */
+        Request::macro('isApi', function (): bool {
+            return $this->is('api/*') && $this->expectsJson();
         });
     }
 }
