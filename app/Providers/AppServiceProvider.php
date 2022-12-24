@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +28,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard();
+
+        Request::macro('getToken', function () {
+            $tokenId     = \Lcobucci\JWT\Configuration::forUnsecuredSigner()
+            ->parser()
+            ->parse($this->bearerToken())
+            ->claims()
+            ->get('jti');
+
+            return \Laravel\Passport\Token::query()->findOrFail($tokenId);
+        });
     }
 }
