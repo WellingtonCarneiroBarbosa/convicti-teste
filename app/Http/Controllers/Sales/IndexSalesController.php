@@ -49,17 +49,17 @@ class IndexSalesController extends Controller
     {
         switch($role) {
             case Role::SELLER_ROLE:
-                $this->getSellerSales();
+                $this->setSellerQuery();
 
                 break;
 
             case Role::MANAGER_ROLE:
-                $this->getUnityManagerSales();
+                $this->setManagerQuery();
 
                 break;
 
             case Role::SUB_DIRECTOR_ROLE:
-                $this->getDirectorshipSales();
+                $this->setSubDirectorQuery();
 
                 break;
 
@@ -75,17 +75,17 @@ class IndexSalesController extends Controller
         }
     }
 
-    private function setSellerSalesQuery(): void
+    private function setSellerQuery(): void
     {
         $this->ordersQuery = Order::query()->whereSeller($this->user);
     }
 
-    private function setUnityManagerSalesQuery(): void
+    private function setManagerQuery(): void
     {
         $this->ordersQuery = Order::query()->whereUnity($this->unity);
     }
 
-    private function setDirectorshipSalesQuery(): void
+    private function setSubDirectorQuery(): void
     {
         $this->ordersQuery = Order::query()->whereDirectorship(
             Directorship::from($this->unity->directorship)
