@@ -2,26 +2,26 @@
 
 namespace Database\Seeders;
 
+use App\Models\User\Role;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class RolesSeeder extends Seeder
 {
     public const ROLES = [
         [
-            'name'       => 'main-director',
+            'name'       => Role::MAIN_DIRECTOR_ROLE,
             'guard_name' => 'api',
         ],
         [
-            'name'       => 'sub-director',
+            'name'       => Role::SUB_DIRECTOR_ROLE,
             'guard_name' => 'api',
         ],
         [
-            'name'       => 'manager',
+            'name'       => Role::MANAGER_ROLE,
             'guard_name' => 'api',
         ],
         [
-            'name'       => 'seller',
+            'name'       => Role::SELLER_ROLE,
             'guard_name' => 'api',
         ],
     ];

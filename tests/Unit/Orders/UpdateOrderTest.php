@@ -26,6 +26,7 @@ class UpdateOrderTest extends TestCase
 
         $originalOrder = $order->replicate();
 
+        $order->uuid      = $order::generateUuid();
         $order->seller_id = 10;
         $order->unity_id  = 2;
         $order->amount    = 100;

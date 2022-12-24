@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
@@ -63,6 +64,22 @@ class AppServiceProvider extends ServiceProvider
          */
         Request::macro('isApi', function (): bool {
             return $this->is('api/*') && $this->expectsJson();
+        });
+
+        /**
+         * Get the authenticated user for the request.
+         *
+         * @param string|null $guard
+         * @return \App\Models\User
+         */
+        Request::macro('currentUser', function ($guard = null): User {
+            $user = call_user_func($this->getUserResolver(), $guard);
+
+            if ($user instanceof User) {
+                return $user;
+            }
+
+            throw new \Exception('There is any user authenticated.');
         });
     }
 }

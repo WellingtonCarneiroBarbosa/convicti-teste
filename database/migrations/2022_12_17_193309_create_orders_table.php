@@ -17,6 +17,7 @@ return new class () extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->foreignIdFor(Unity::class);
             $table->foreignIdFor(User::class, 'seller_id');
             $table->bigInteger('amount');

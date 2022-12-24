@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Enums\Directorship;
 use App\Helpers\MonetaryValue;
 use App\Models\Concerns\HasImmutableColumn;
 use App\Models\Concerns\HasMonetaryColumn;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Auditable;
+use Ramsey\Uuid\Uuid;
 
 /**
  * App\Models\Order
@@ -71,10 +74,20 @@ class Order extends Model
     ];
 
     protected $immutableFields = [
+        'uuid',
         'amount',
         'seller_id',
         'unity_id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Order $order) {
+            $order->uuid = $this::generateUuid();
+        });
+    }
 
     public function amount(): Attribute
     {
@@ -89,5 +102,39 @@ class Order extends Model
     public function seller(): BelongsTo
     {
         return $this->belongsTo(User::class, 'seller_id', 'id');
+    }
+
+    public function whereSeller(User $seller): Builder
+    {
+        return $this->where('seller_id', $seller->id);
+    }
+
+    public function whereUnity(Unity $unity): Builder
+    {
+        return $this->where('unity_id', $unity->id);
+    }
+
+    public function whereDirectorship(Directorship $directorship): Builder
+    {
+        return $this->where('directorship', $directorship);
+    }
+
+    public static function generateUuid(): string
+    {
+        do {
+            $uuid = Uuid::uuid4()->toString();
+        } while (self::where('uuid', $uuid)->exists());
+
+        return $uuid;
+    }
+
+    public function findByUuid(string $uuid): ?self
+    {
+        return self::where('uuid', $uuid)->first();
+    }
+
+    public function findByUuidOrFail(string $uuid): self
+    {
+        return self::where('uuid', $uuid)->firstOrFail();
     }
 }
