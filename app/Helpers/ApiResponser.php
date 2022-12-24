@@ -74,7 +74,7 @@ class ApiResponser
                 'message'       => $exception->getInternalMessage(),
                 'description'   => $exception->getInternalDescription(),
                 'hint'          => $exception->getHint(),
-                'http_code'     => $exception->getHttpCode(),
+                'code'          => $exception->getInternalCode(),
             ],
             status: $exception->getHttpCode(),
             headers: $headers,

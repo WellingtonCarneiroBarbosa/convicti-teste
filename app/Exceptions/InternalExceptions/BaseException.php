@@ -3,6 +3,7 @@
 namespace App\Exceptions\InternalExceptions;
 
 use Exception;
+use Illuminate\Http\Request;
 use Throwable;
 
 class BaseException extends Exception implements InternalException
@@ -13,7 +14,7 @@ class BaseException extends Exception implements InternalException
         protected ?int $httpCode = null,
         protected ?Throwable $previous = null,
     ) {
-        parent::__construct($this->getInternalDescription(), $this->getInternalCode(), $previous);
+        parent::__construct($this->getMessage(), $this->getInternalCode(), $previous);
     }
 
     public function getHint(): string
@@ -28,7 +29,7 @@ class BaseException extends Exception implements InternalException
 
     public function getInternalMessage(): string
     {
-        return $this->message ?? $this::INTERNAL_MESSAGE;
+        return ! isset($this->message) || $this->message === "" ? $this::INTERNAL_MESSAGE : $this->message;
     }
 
     public function getInternalDescription(): string
@@ -39,5 +40,10 @@ class BaseException extends Exception implements InternalException
     public function getHttpCode(): int
     {
         return $this->httpCode ?? $this::HTTP_CODE;
+    }
+
+    public function render(Request $request)
+    {
+        return apiResponse()->error($this);
     }
 }
