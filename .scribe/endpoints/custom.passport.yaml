@@ -1,0 +1,178 @@
+- httpMethods:
+    - POST
+  uri: api/v1/token
+  metadata:
+    title: "Issuing user tokens."
+    description: |-
+      This endpoint allows you to issue a new bearer user token.
+      It will return a valid bearer token if the user credentials are correct.
+    groupName: "Auth"
+    authenticated: false
+    custom: []
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  urlParameters: []
+  queryParameters: []
+  bodyParameters:
+    client_id:
+      name: client_id
+      description: "Your app client id."
+      required: true
+      example: "96fc84ac-95ba-4f91-8cb4-9e228a7e849d"
+      type: string
+      custom: []
+    client_secret:
+      name: client_secret
+      description: "Your app client secret."
+      required: true
+      example: SIlF0xFYgKe2Efdl5Y9fnxZgtQSubjRhGkPWaYKm
+      type: string
+      custom: []
+    username:
+      name: username
+      description: "The user's email."
+      required: true
+      example: "johnjoe@example.com"
+      type: string
+      custom: []
+    password:
+      name: password
+      description: "The user's password."
+      required: true
+      example: "xnasj#2s2wÇDSAKms"
+      type: string
+      custom: []
+    grant_type:
+      name: grant_type
+      description: "The grant type."
+      required: true
+      example: "password"
+      type: string
+      custom: []
+    scope:
+      name: scope
+      description: "The scope."
+      required: true
+      example: "*"
+      type: string
+      custom: []
+  responses:
+    - status: 200
+      content: |
+        {
+            "token_type": "Bearer",
+            "expires_in": 1296000,
+            "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NmZjODRhYy05NWJhLTRmOTEtOGNiNC05ZTIyOGE3ZTg0OWQiLCJqdGkiOiI4M2YwMWY0Mzc5ZDkzY2NhYWUzZDM5ZTAzNjJiOTgwODgwYzgxYzAzNWNiMGZiZjI0ZmQwYmZiZDE0MmU1MWZiNTA1ODdhOWExY2E3NWE1ZSIsImlhdCI6MTY2MDExNjg0Mi42MTkwNzYsIm5iZiI6MTY2MDExNjg0Mi42MTkwNzgsImV4cCI6MTY2MTQxMjg0Mi42MDg4LCJzdWIiOiIzIiwic2NvcGVzIjpbIioiXX0.pCyXGtzz7ZoOM45ukE70fUtog9fyIJrDP-7Ulo81LU0Cnxhtq7hkKNLDcES9-jcwShjQMFBlRCEFBacU7ZtqoLEQw6JgGcGqPhfQVPa20PaTdmmMmvBtrYg46QFpr2tvVzEOGxy8FerxBFeG20dp7d3KkLZeVxzwRdt271TBoQ4yV4egxKDvyPX7sZ78dlKWtyxluYTkBgkKVvUJo_Vbq7fCpbSzDmqNzCGRbXDciqUafYYBcApfUPem_zRGOuwIRf4e9iOYoDfXOHcBWiZObPnBWLqDBViTvBJ8GSvTzplYB3LwKIPjkRTZDi4SeTRRbgdPBt3lOEGrQjR__yugJ-0MqKGMTZywV3y12esqXQv3Sw2SOfQRWLpbhYHak3KJMXSrPDZ5itBmZYLMpwsvaAge9RdSce7si8L7P0cbnMtbR8xdZAJiwn544MoQgtIaS2jkLT-Kirb85NRnZw0Dr14pwvDbODU67OWF9I8ozsipa0FU1oux95BpjZqUecj0Ze4X-zvRc8cXnfJRAUo12T8wkuroa6dmTd3BHQ_8kt4ZVVFXFk3Lk9g92HL_oGUkpyaJ91zea5iu_0jOvZDvJSDXU0j6cH-9gscW_Lz22F-5qjpJdiWXd8l9meeRni-GRbTMTYCtXkKGvHZyEAqqKN12RlcxkRJYm2DnXJ_AIE8",
+            "refresh_token": "def5020069ca6e841cee51951834ac2f50d605c8d7cb49ccc4b88c6c28eb261b06413b969318bb851817edb4360c90f76d4a10f7e8752cf11ccdb706d959fc44b901153db6b29728a2d8a472caac2e69ee2c19306a8041d7bd9e5c4504e923ddbff3f9003044825fc24c34f2f9f69a85dda61651865d2dfb8db1c3c9bbbb189feafd6e9e299734e705896155933a5959fada25c268f2b9f8f5b68de43ddc554915332f9e88bf71ba3f35a1811afa990bb43b35cfcda29cfeafff01e14b30af676000d09d9ea22b509f86bb76d3eb4a42f913c5844b2859cbd0d72952c113ef3bcf829735b3eaec54a7aa1ac0c7f46a0da1a279328b06e1477e6e909809562269de8e8ac200251a628795c77b77401c1d8e24365721e85caa201ee9b4de2e2072817e15c8b8f18869fd29db247f0eab31e38d28317f6a2ca0c79cb1bb4c4dfa141c938034c101876ded441d075b1dc876527d928c45035b5bad896d8b886c9aff6fdfa92d030ad64b5e08161609bb65e72ef339682f329df6bb5f9f5c6afd66d54d87daf62c5db1"
+        }
+      headers: []
+      description: "200"
+
+    - status: 400
+      content: |
+        {
+            "error": "invalid_grant",
+            "error_description": "The user credentials were incorrect.",
+            "message": "The user credentials were incorrect."
+        }
+      headers: []
+      description: "400: Invalid username or password provided"
+
+    - status: 401
+      content: |
+        {
+            "error": "invalid_client",
+            "error_description": "Client authentication failed",
+            "message": "Client authentication failed"
+        }
+      headers: []
+      description: "401: Invalid client id or client secret provided"
+
+  responseFields: []
+
+- httpMethods:
+    - POST
+  uri: api/v1/token
+  metadata:
+    title: "Refreshing the user token."
+    description: |-
+      If the user's token is expired, you don't need to login the user again. Just use
+      this endpoint to refresh the user token throught the user refresh_token.
+    groupName: "Auth"
+    authenticated: false
+    custom: []
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  urlParameters: []
+  queryParameters: []
+  bodyParameters:
+    client_id:
+      name: client_id
+      description: "Your app client id."
+      required: true
+      example: "96fc84ac-95ba-4f91-8cb4-9e228a7e849d"
+      type: string
+      custom: []
+    client_secret:
+      name: client_secret
+      description: "Your app client secret."
+      required: true
+      example: SIlF0xFYgKe2Efdl5Y9fnxZgtQSubjRhGkPWaYKm
+      type: string
+      custom: []
+    grant_type:
+      name: grant_type
+      description: "The grant type."
+      required: true
+      example: "refresh_token"
+      type: string
+      custom: []
+    scope:
+      name: scope
+      description: "The scope."
+      required: true
+      example: "*"
+      type: string
+      custom: []
+    refresh_token:
+      name: refresh_token
+      description: "The user's refresh token."
+      required: true
+      example: "def5020069ca6e841cee51951834ac2f50d605c8d7cb49ccc4b88c6c28eb261b06413b969318bb851817edb4360c90f76d4a10f7e8752cf11ccdb706d959fc44b901153db6b29728a2d8a472caac2e69ee2c19306a8041d7bd9e5c4504e923ddbff3f9003044825fc24c34f2f9f69a85dda61651865d2dfb8db1c3c9bbbb189feafd6e9e299734e705896155933a5959fada25c268f2b9f8f5b68de43ddc554915332f9e88bf71ba3f35a1811afa990bb43b35cfcda29cfeafff01e14b30af676000d09d9ea22b509f86bb76d3eb4a42f913c5844b2859cbd0d72952c113ef3bcf829735b3eaec54a7aa1ac0c7f46a0da1a279328b06e1477e6e909809562269de8e8ac200251a628795c77b77401c1d8e24365721e85caa201ee9b4de2e2072817e15c8b8f18869fd29db247f0eab31e38d28317f6a2ca0c79cb1bb4c4dfa141c938034c101876ded441d075b1dc876527d928c45035b5bad896d8b886c9aff6fdfa92d030ad64b5e08161609bb65e72ef339682f329df6bb5f9f5c6afd66d54d87daf62c5db1"
+      type: string
+      custom: []
+  responses:
+    - status: 200
+      content: |
+        {
+          "token_type": "Bearer",
+          "expires_in": 1296000,
+          "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NmZjODRhYy05NWJhLTRmOTEtOGNiNC05ZTIyOGE3ZTg0OWQiLCJqdGkiOiI5YTM4NDg4NmJmZGNmODRlNGUxN2UxNjY4NTNlZjVmNmEzNzcwYzdiZjI0NmY0MjFkMmQwNjk4NzFiYjE2OTQ5NzE4ZWQ5ZTdlYmM0NWFkMCIsImlhdCI6MTY2MDExOTM3OS41MTI3MDgsIm5iZiI6MTY2MDExOTM3OS41MTI3MTEsImV4cCI6MTY2MTQxNTM3OS41MDQ0ODgsInN1YiI6IjMiLCJzY29wZXMiOlsiKiJdfQ.qnhAQO7eQ0ayu6RIHG2xLIwBaq8cCfLIY1jyCO3Jkex_EefCe_8S7AVRBDTUsmyhi6tVDG_k42CUgX0vpqWdS9xo3P6v50paAr6h58_s-0Mw-Q8_ZP2Alxoo9W6gikTGgWFBaKW4xSFt1zcfiegYlCjpxMcKL2DalsFohDGnppL8UzPBg-uve3tBUBlIN-d8fnpuBwLZHT7W2uVsUHAdHPdMPScXh8ymeLw4jbtXkJz9uNY_Pvyigz17g9M6kwh7UVpdpyZ8Hv0jFpR6muQ9MMpicNbsBON3nJDrQJAJxLrVjjrMLWNzGqIbW0J50t6xkzDV3Zt6OCY2CZIzjnkoqedz6JtuzjawR5l6prG0S0_LTOzu3c21mTuFIU43gXAyJnITxXEyu4_Cb6YqzNBfyzuLIzlUlZWTnTQHorME8brfCu0uemYxj6SdxIyM7hOQFIg9uBSHf39_xhcfZLcOuRz3BkEqD2RMC1qVbpTjmUAbtMEsWczTFsyVSBbqbblsXsL7EZqPNG1a-xMtcZmwMPci3j_0-qav2vV4IKzIqMBKFm7x_3QXls55N4KSS7ENr51HyskFQsaZ7gjJZh4VYTwdMJmB6CHdWQtlEZOf3o1lDJITTZ4_OnzKrUdCcsUo96V6ptp8A2uG1j-c-z1lXfxwK19YZ2VExx6q6HRn5OQ",
+          "refresh_token": "def50200ad002c0a47f7a437acd41868dd520b76d5cc6a19c3c980bbecc20ce59bf2a88abda09f25ded15fa38e0a4fcec537f552dd2757e0461aa106d66ee8150e82ee06e39bebe1f2fb442fbc17940fc89bb9705ac083b9d50687e7b28dd95dde1fa5ec049ee12e73812a0f8cdd55017dd4309a9959668503d791e60c2565d95944ffc3b8dc6c758e73b0c5e64a3f363e21ae2cbebf79d2f429110d09a82e1e3b201b018f3623c9864807f7d6d465e9799da6fa2281d7cb2af25e2b0024bdfa0b6fe9205043045ebeff39afe2f9f8c3378506bd8d4ceb263918f8cccd78855b684a864a831291028934c15f43509ab1d12c13eb8219517762b7f257b7fedce90c37fef0b18f18206ad1c5fa11e9443b9622b378cdc410e4f9730ccfafe63747e57614faf7c3cb6e66c0c2cfd00ab6e2490141ea356def8e94d6e44bd73368edea323fe61740765cfe892f50aa18e307f2843f43a9340a3d4440049e83bff4ded499b7cc9d626aacbbf51b011b066c9bf18369d661e68de71dd2144e789c2e397895491339693b"
+        }
+      headers: []
+      description: "200"
+
+    - status: 401
+      content: |
+        {
+            "error": "invalid_request",
+            "error_description": "The refresh token is invalid.",
+            "hint": "Token has been revoked",
+            "message": "The refresh token is invalid."
+        }
+      headers: []
+      description: "401"
+
+    - status: 401
+      content: |
+        {
+            "error": "invalid_client",
+            "error_description": "Client authentication failed",
+            "message": "Client authentication failed"
+        }
+      headers: []
+      description: "401: Invalid client id or client secret provided"
+  responseFields: []

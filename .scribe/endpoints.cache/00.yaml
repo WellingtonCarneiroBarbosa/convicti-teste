@@ -616,9 +616,9 @@ endpoints:
           cache-control: 'no-cache, private'
           content-type: application/json
           x-ratelimit-limit: '60'
-          x-ratelimit-remaining: '59'
+          x-ratelimit-remaining: '58'
           access-control-allow-origin: '*'
-          set-cookie: 'XSRF-TOKEN=eyJpdiI6IllhV0JxaW02eFdXZit2ZHFBbW9iOEE9PSIsInZhbHVlIjoiWVRvWHJJMnFrMTk0N2Y4Y1o2U1V4c1h0TGJnM1A3RHhhcTMxMFB6Z2xHQ2dLZzZ2TWdUY2FnVkg1MHplcDNtYzU1dk1rd1hibGRlSXJzbzZISzNabUVYUDZIMndPaUZiekFLMkFmZ0VJUkNtcGtFMGJuVGJUR3NxeVE0OU1vbSsiLCJtYWMiOiIyOGIzYWZmMWFiYmJlODc2YmI5ZTExNjNjY2ZjYTcxMTVlYjAyZWVmZTU2ZGJmYjdkOGZhZjlhNjUzMzg5MmIwIiwidGFnIjoiIn0%3D; expires=Sat, 24 Dec 2022 15:57:53 GMT; Max-Age=7200; path=/; samesite=lax; convict_test_app_session=Gy27vSHzIfBDOyLdjpS1DUP7QAb0p1jNYkO64BMr; expires=Sat, 24 Dec 2022 15:57:53 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'XSRF-TOKEN=eyJpdiI6IllDbVpiMS9RalhjWGhtcTdBY25QQnc9PSIsInZhbHVlIjoidW9vWFBlUWFoWkkrRmk2UE84eWljc3UvNGQvNnNOWHNUTGRlNkFLdG16OFV5Rjc2emh4L2t3WE1QYWhOdTA2amlhbVZRQlFNOG5OV0FyN3R0blF0TjFwN2MzMXphalNBMU5TSlZKclA2NjcyYUtDSWxJZWRNUVRTMDVqc252VkkiLCJtYWMiOiIyNDc3N2QxYjFlN2M5Mzk2YTc0MDUwZmJiZTZlNzliNzczZGZkNmY4OGEwZWFkNjZlNDViM2M5ODhjNGFiOWFiIiwidGFnIjoiIn0%3D; expires=Sat, 24 Dec 2022 18:39:47 GMT; Max-Age=7200; path=/; samesite=lax; convict_test_app_session=gtHnuu8xEBoyIuXaok6LrWClSbVke70xgZHYYe0X; expires=Sat, 24 Dec 2022 18:39:47 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
         custom: []
     responseFields: []

@@ -61,7 +61,7 @@ return [
              * The route can be referenced by name or path here. Wildcards are supported.
              */
             'exclude' => [
-                //
+                'token',
             ],
 
             /*
@@ -147,7 +147,7 @@ return [
          * HTML documentation, assets and Postman collection will be generated to this folder.
          * Source Markdown will still be in resources/docs.
          */
-        'output_path' => '/docs',
+        'output_path' => 'public/docs',
     ],
 
     /*
@@ -379,7 +379,7 @@ INTRO
      * If you only use one db connection, you can leave this as is.
      */
     'database_connections_to_transact' => [config('database.default')],
-    'groups' => [
+    'groups'                           => [
         /*
          * Endpoints which don't have a @group will be placed in this default group.
          */
@@ -392,7 +392,7 @@ INTRO
          * If an endpoint/subgroup is listed under a group it doesn't belong in, it will be ignored.
          * Note: you must include the initial '/' when writing an endpoint.
          */
-        'order' => [],
+        'order'   => [],
     ],
     /**
      * Customize the "Last updated" value displayed in the docs by specifying tokens and formats.
@@ -404,13 +404,13 @@ INTRO
      * The format you pass to `date` will be passed to PhP's `date()` function.
      * The format you pass to `git` can be either "short" or "long".
      */
-    'last_updated' => 'Last updated: {date:F j, Y}',
-    'examples' => [
+    'last_updated'                     => 'Last updated: {date:F j, Y}',
+    'examples'                         => [
         /*
          * If you would like the package to generate the same example values for parameters on each run,
          * set this to any number (eg. 1234)
          */
-        'faker_seed' => null,
+        'faker_seed'    => null,
         /*
          * With API resources and transformers, Scribe tries to generate example models to use in your API responses.
          * By default, Scribe will try the model's factory, and if that fails, try fetching the first from the database.
